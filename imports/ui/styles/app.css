@@ -1,33 +1,41 @@
 :root[data-theme='light'] {
   color-scheme: light;
-  --vtf-bg: #f4f6fb;
-  --vtf-surface: #ffffff;
-  --vtf-surface-2: #eef2ff;
-  --vtf-text: #0f172a;
-  --vtf-muted: #64748b;
-  --vtf-border: rgba(15, 23, 42, 0.08);
-  --vtf-accent: #4f46e5;
-  --vtf-accent-2: #6366f1;
-  --vtf-danger: #dc2626;
-  --vtf-warn: #ea580c;
-  --vtf-shadow: 0 24px 80px rgba(15, 23, 42, 0.08);
-  --vtf-glass: rgba(255, 255, 255, 0.72);
+  --vtf-bg: #f4f0e8;
+  --vtf-surface: #fffdf8;
+  --vtf-surface-2: #e6f4f1;
+  --vtf-text: #1c1917;
+  --vtf-muted: #78716c;
+  --vtf-border: rgba(28, 25, 23, 0.09);
+  --vtf-accent: #0f766e;
+  --vtf-accent-2: #14b8a6;
+  --vtf-danger: #b91c1c;
+  --vtf-warn: #c2410c;
+  --vtf-shadow: 0 20px 56px rgba(28, 25, 23, 0.09);
+  --vtf-glass: rgba(255, 253, 248, 0.82);
 }
 
 :root[data-theme='dark'] {
   color-scheme: dark;
-  --vtf-bg: #070b14;
-  --vtf-surface: #0f1629;
-  --vtf-surface-2: #151f38;
-  --vtf-text: #e6eefc;
-  --vtf-muted: #94a3b8;
-  --vtf-border: rgba(226, 232, 240, 0.08);
-  --vtf-accent: #818cf8;
-  --vtf-accent-2: #a5b4fc;
-  --vtf-danger: #f87171;
+  --vtf-bg: #0a100f;
+  --vtf-surface: #121a18;
+  --vtf-surface-2: #1a2624;
+  --vtf-text: #f5f5f4;
+  --vtf-muted: #a8a29e;
+  --vtf-border: rgba(245, 245, 244, 0.09);
+  --vtf-accent: #2dd4bf;
+  --vtf-accent-2: #5eead4;
+  --vtf-danger: #fca5a5;
   --vtf-warn: #fdba74;
-  --vtf-shadow: 0 24px 80px rgba(0, 0, 0, 0.55);
-  --vtf-glass: rgba(15, 22, 41, 0.76);
+  --vtf-shadow: 0 22px 64px rgba(0, 0, 0, 0.48);
+  --vtf-glass: rgba(18, 26, 24, 0.88);
+}
+
+:root[data-theme='dark'] .vtf-btn-primary {
+  box-shadow: 0 14px 36px rgba(45, 212, 191, 0.22);
+}
+
+:root[data-theme='dark'] .vtf-logo-mark {
+  box-shadow: 0 12px 36px rgba(45, 212, 191, 0.32);
 }
 
 *,
@@ -40,7 +48,7 @@ html,
 body {
   margin: 0;
   min-height: 100%;
-  font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
   background: var(--vtf-bg);
   color: var(--vtf-text);
   -webkit-font-smoothing: antialiased;
@@ -64,20 +72,21 @@ textarea {
   place-items: center;
   padding: 24px;
   background:
-    radial-gradient(900px 420px at 15% -10%, rgba(99, 102, 241, 0.22), transparent 55%),
-    radial-gradient(700px 420px at 110% 10%, rgba(56, 189, 248, 0.18), transparent 50%),
+    radial-gradient(880px 400px at 12% -8%, rgba(20, 184, 166, 0.32), transparent 58%),
+    radial-gradient(720px 440px at 108% 12%, rgba(251, 146, 60, 0.22), transparent 52%),
+    radial-gradient(600px 360px at 50% 108%, rgba(15, 118, 110, 0.12), transparent 45%),
     var(--vtf-bg);
 }
 
 .vtf-auth-card,
 .vtf-loader-card {
   width: min(440px, 100%);
-  padding: 28px;
-  border-radius: 20px;
+  padding: 32px;
+  border-radius: 24px;
   background: var(--vtf-glass);
   border: 1px solid var(--vtf-border);
   box-shadow: var(--vtf-shadow);
-  backdrop-filter: blur(14px);
+  backdrop-filter: blur(18px);
 }
 
 .vtf-brand-block {
@@ -94,15 +103,16 @@ textarea {
 }
 
 .vtf-logo-mark {
-  width: 48px;
-  height: 48px;
-  border-radius: 14px;
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
   display: grid;
   place-items: center;
   font-weight: 700;
-  background: linear-gradient(135deg, var(--vtf-accent), var(--vtf-accent-2));
+  font-size: 1.35rem;
+  background: linear-gradient(145deg, var(--vtf-accent), var(--vtf-accent-2));
   color: #fff;
-  box-shadow: 0 12px 28px rgba(79, 70, 229, 0.35);
+  box-shadow: 0 12px 32px rgba(15, 118, 110, 0.38);
 }
 
 .vtf-muted {
@@ -147,8 +157,8 @@ textarea {
 
 .vtf-input:focus,
 .vtf-select:focus {
-  border-color: rgba(99, 102, 241, 0.65);
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.22);
+  border-color: rgba(20, 184, 166, 0.65);
+  box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.22);
 }
 
 .vtf-input-sm {
@@ -158,7 +168,7 @@ textarea {
 }
 
 .vtf-input-search {
-  min-width: 200px;
+  min-width: 0;
 }
 
 .vtf-textarea {
@@ -167,6 +177,11 @@ textarea {
 }
 
 .vtf-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  line-height: 1.25;
   border-radius: 12px;
   border: 1px solid transparent;
   padding: 11px 16px;
@@ -184,9 +199,9 @@ textarea {
 }
 
 .vtf-btn-primary {
-  background: linear-gradient(135deg, var(--vtf-accent), var(--vtf-accent-2));
+  background: linear-gradient(145deg, var(--vtf-accent), var(--vtf-accent-2));
   color: #fff;
-  box-shadow: 0 14px 34px rgba(79, 70, 229, 0.35);
+  box-shadow: 0 14px 32px rgba(15, 118, 110, 0.35);
 }
 
 .vtf-btn-secondary {
@@ -209,6 +224,7 @@ textarea {
 .vtf-btn-block {
   width: 100%;
   justify-self: stretch;
+  justify-content: center;
 }
 
 .vtf-btn-sm {
@@ -236,7 +252,7 @@ textarea {
   width: 38px;
   height: 38px;
   border-radius: 50%;
-  border: 3px solid rgba(99, 102, 241, 0.25);
+  border: 3px solid rgba(20, 184, 166, 0.28);
   border-top-color: var(--vtf-accent);
   margin: 0 auto 12px;
   animation: vtf-spin 0.75s linear infinite;
@@ -293,8 +309,8 @@ textarea {
   position: fixed;
   inset: 0;
   z-index: 30;
-  background: rgba(15, 23, 42, 0.42);
-  backdrop-filter: blur(2px);
+  background: rgba(28, 25, 23, 0.4);
+  backdrop-filter: blur(3px);
 }
 
 @media (max-width: 959px) {
@@ -323,6 +339,9 @@ textarea {
 }
 
 .vtf-nav-item {
+  display: flex;
+  align-items: center;
+  width: 100%;
   text-align: left;
   border-radius: 12px;
   border: 1px solid transparent;
@@ -382,7 +401,7 @@ textarea {
 
 .vtf-chip:hover {
   transform: translateY(-1px);
-  border-color: rgba(99, 102, 241, 0.35);
+  border-color: rgba(20, 184, 166, 0.45);
 }
 
 .vtf-chip-grow {
@@ -402,14 +421,26 @@ textarea {
 }
 
 .vtf-inline-add {
-  display: grid;
-  grid-template-columns: 1fr auto;
+  display: flex;
   gap: 8px;
+  align-items: center;
+}
+
+.vtf-inline-add .vtf-input {
+  flex: 1;
+  min-width: 0;
 }
 
 .vtf-side-footer {
   display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 8px;
+}
+
+@media (max-width: 340px) {
+  .vtf-side-footer {
+    grid-template-columns: 1fr;
+  }
 }
 
 .vtf-main {
@@ -431,6 +462,8 @@ textarea {
 
 .vtf-menu-btn {
   display: inline-grid;
+  flex-shrink: 0;
+  align-self: center;
 }
 
 @media (min-width: 960px) {
@@ -447,16 +480,31 @@ textarea {
 
 .vtf-topbar-title {
   flex: 1;
+  min-width: 0;
+}
+
+.vtf-topbar-title .vtf-muted {
+  margin-top: 4px;
+  margin-bottom: 0;
+}
+
+.vtf-topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  margin-left: auto;
 }
 
 .vtf-icon-btn {
   width: 38px;
   height: 38px;
+  flex-shrink: 0;
   border-radius: 12px;
   border: 1px solid var(--vtf-border);
   background: var(--vtf-surface);
   cursor: pointer;
-  display: grid;
+  display: inline-grid;
   place-items: center;
   transition:
     transform 0.12s ease,
@@ -464,7 +512,7 @@ textarea {
 }
 
 .vtf-icon-btn:hover {
-  border-color: rgba(99, 102, 241, 0.35);
+  border-color: rgba(20, 184, 166, 0.45);
 }
 
 .vtf-dash {
@@ -478,8 +526,8 @@ textarea {
 }
 
 .vtf-card {
-  padding: 16px;
-  border-radius: 16px;
+  padding: 18px;
+  border-radius: 18px;
   background: var(--vtf-surface);
   border: 1px solid var(--vtf-border);
   box-shadow: var(--vtf-shadow);
@@ -504,10 +552,10 @@ textarea {
 
 .vtf-progress {
   margin-top: 16px;
-  padding: 16px;
-  border-radius: 16px;
+  padding: 18px;
+  border-radius: 18px;
   border: 1px solid var(--vtf-border);
-  background: linear-gradient(135deg, rgba(99, 102, 241, 0.12), transparent);
+  background: linear-gradient(135deg, rgba(20, 184, 166, 0.14), transparent);
 }
 
 .vtf-progress-head {
@@ -543,6 +591,34 @@ textarea {
   margin-bottom: 16px;
 }
 
+.vtf-toolbar-search {
+  flex: 1 1 min(100%, 280px);
+  min-width: 0;
+}
+
+.vtf-toolbar-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+@media (min-width: 720px) {
+  .vtf-toolbar-filters {
+    margin-left: auto;
+    justify-content: flex-end;
+  }
+}
+
+.vtf-toolbar-filters .vtf-select {
+  min-width: 140px;
+}
+
+.vtf-btn-toolbar {
+  white-space: nowrap;
+}
+
 .vtf-task-list {
   list-style: none;
   margin: 0;
@@ -556,8 +632,8 @@ textarea {
   grid-template-columns: auto auto minmax(0, 1fr) auto;
   gap: 10px;
   align-items: center;
-  padding: 14px;
-  border-radius: 16px;
+  padding: 16px;
+  border-radius: 14px;
   background: var(--vtf-surface);
   border: 1px solid var(--vtf-border);
   transition:
@@ -568,7 +644,7 @@ textarea {
 
 .vtf-task-row:hover {
   transform: translateY(-2px);
-  border-color: rgba(99, 102, 241, 0.35);
+  border-color: rgba(20, 184, 166, 0.38);
   box-shadow: var(--vtf-shadow);
 }
 
@@ -672,16 +748,23 @@ textarea {
 }
 
 .vtf-due.is-upcoming {
-  background: rgba(56, 189, 248, 0.14);
-  color: #38bdf8;
+  background: rgba(20, 184, 166, 0.18);
+  color: var(--vtf-accent);
 }
 
 .vtf-task-actions {
   display: flex;
   gap: 6px;
+  align-items: center;
+  justify-content: flex-end;
+  align-self: center;
 }
 
 .vtf-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
   padding: 42px 22px;
   text-align: center;
   border-radius: 18px;
@@ -689,9 +772,18 @@ textarea {
   background: var(--vtf-surface);
 }
 
+.vtf-empty .vtf-muted {
+  margin: 0;
+  max-width: 28rem;
+}
+
+.vtf-empty .vtf-btn {
+  margin-top: 4px;
+}
+
 .vtf-empty-title {
   font-weight: 700;
-  margin-bottom: 8px;
+  margin: 0;
 }
 
 .vtf-panel-loading {
@@ -716,8 +808,8 @@ textarea {
 .vtf-modal-backdrop {
   position: absolute;
   inset: 0;
-  background: rgba(15, 23, 42, 0.55);
-  backdrop-filter: blur(4px);
+  background: rgba(28, 25, 23, 0.52);
+  backdrop-filter: blur(5px);
   pointer-events: auto;
 }
 
@@ -725,8 +817,8 @@ textarea {
   position: relative;
   z-index: 1;
   width: min(560px, 100%);
-  border-radius: 18px;
-  padding: 18px;
+  border-radius: 20px;
+  padding: 22px;
   background: var(--vtf-surface);
   border: 1px solid var(--vtf-border);
   box-shadow: var(--vtf-shadow);
@@ -748,6 +840,8 @@ textarea {
 .vtf-modal-actions {
   display: flex;
   justify-content: flex-end;
+  align-items: center;
+  flex-wrap: wrap;
   gap: 10px;
   margin-top: 14px;
 }
@@ -792,15 +886,15 @@ textarea {
 }
 
 .vtf-toast-info {
-  border-color: rgba(56, 189, 248, 0.35);
+  border-color: rgba(20, 184, 166, 0.4);
 }
 
 .vtf-confirm-backdrop {
   position: fixed;
   inset: 0;
   z-index: 105;
-  background: rgba(15, 23, 42, 0.42);
-  backdrop-filter: blur(3px);
+  background: rgba(28, 25, 23, 0.44);
+  backdrop-filter: blur(4px);
   display: grid;
   place-items: center;
   padding: 22px;
@@ -822,6 +916,8 @@ textarea {
 .vtf-confirm-actions {
   display: flex;
   justify-content: flex-end;
+  align-items: center;
+  flex-wrap: wrap;
   gap: 10px;
 }
 

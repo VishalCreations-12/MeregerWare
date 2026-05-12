@@ -1,9 +1,9 @@
 import assert from "assert";
 
-describe("V Task Force", function () {
+describe("J To Do List", function () {
   it("package.json has correct name", async function () {
     const { name } = await import("../package.json");
-    assert.strictEqual(name, "v-task-force");
+    assert.strictEqual(name, "j-to-do-list");
   });
 
   if (Meteor.isClient) {

@@ -1,5 +1,5 @@
 {
-  "name": "v-task-force",
+  "name": "j-to-do-list",
   "private": true,
   "scripts": {
     "start": "meteor run",

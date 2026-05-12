@@ -2,10 +2,10 @@
   <div class="vtf-shell">
     <aside class="vtf-side {{navOpenClass}}">
       <div class="vtf-side-brand">
-        <div class="vtf-logo-mark">V</div>
+        <div class="vtf-logo-mark">J</div>
         <div>
-          <div class="vtf-side-title">Task Force</div>
-          <div class="vtf-side-sub vtf-muted">Command center</div>
+          <div class="vtf-side-title">J To Do List</div>
+          <div class="vtf-side-sub vtf-muted">Lists &amp; reminders</div>
         </div>
       </div>
       <nav class="vtf-nav">
@@ -47,10 +47,12 @@
       <header class="vtf-topbar">
         <button type="button" class="vtf-icon-btn vtf-menu-btn js-open-nav" aria-label="Open navigation">☰</button>
         <div class="vtf-topbar-title">
-          <h1>V Task Force</h1>
+          <h1>J To Do List</h1>
           <p class="vtf-muted">Secure workspace · {{userEmail}}</p>
         </div>
-        <button type="button" class="vtf-btn vtf-btn-primary vtf-btn-sm js-open-create">New task</button>
+        <div class="vtf-topbar-actions">
+          <button type="button" class="vtf-btn vtf-btn-primary vtf-btn-sm js-open-create">New task</button>
+        </div>
       </header>
       {{#unless dataReady}}
         <div class="vtf-panel vtf-panel-loading">
@@ -88,20 +90,22 @@
         </section>
         <section class="vtf-board" id="vtf-board">
           <div class="vtf-toolbar">
-            <input class="vtf-input vtf-input-search" type="search" placeholder="Search tasks" aria-label="Search tasks">
-            <select class="vtf-select js-filter-completion">
-              <option value="all">All statuses</option>
-              <option value="pending">Pending</option>
-              <option value="completed">Completed</option>
-            </select>
-            <select class="vtf-select js-filter-priority">
-              <option value="all">All priorities</option>
-              <option value="low">Low</option>
-              <option value="medium">Medium</option>
-              <option value="high">High</option>
-              <option value="urgent">Urgent</option>
-            </select>
-            <button type="button" class="vtf-btn vtf-btn-ghost js-clear-filters">Reset filters</button>
+            <input class="vtf-input vtf-input-search vtf-toolbar-search" type="search" placeholder="Search tasks" aria-label="Search tasks">
+            <div class="vtf-toolbar-filters">
+              <select class="vtf-select js-filter-completion">
+                <option value="all">All statuses</option>
+                <option value="pending">Pending</option>
+                <option value="completed">Completed</option>
+              </select>
+              <select class="vtf-select js-filter-priority">
+                <option value="all">All priorities</option>
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+                <option value="urgent">Urgent</option>
+              </select>
+              <button type="button" class="vtf-btn vtf-btn-ghost vtf-btn-toolbar js-clear-filters">Reset filters</button>
+            </div>
           </div>
           {{#if filteredEmpty}}
             <div class="vtf-empty">

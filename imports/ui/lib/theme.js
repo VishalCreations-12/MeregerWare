@@ -1,6 +1,6 @@
 import { ReactiveVar } from 'meteor/reactive-var';
 
-const STORAGE_KEY = 'vtf-theme';
+const STORAGE_KEY = 'jtdl-theme';
 
 function detectPreferred() {
   if (typeof window === 'undefined') return 'light';

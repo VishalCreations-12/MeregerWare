@@ -1,0 +1,190 @@
+<template name="workspacePage">
+  <div class="vtf-shell">
+    <aside class="vtf-side {{navOpenClass}}">
+      <div class="vtf-side-brand">
+        <div class="vtf-logo-mark">V</div>
+        <div>
+          <div class="vtf-side-title">Task Force</div>
+          <div class="vtf-side-sub vtf-muted">Command center</div>
+        </div>
+      </div>
+      <nav class="vtf-nav">
+        <button type="button" class="vtf-nav-item is-active js-nav-dash">
+          <span>Dashboard</span>
+        </button>
+        <button type="button" class="vtf-nav-item js-nav-board">
+          <span>Tasks</span>
+        </button>
+      </nav>
+      <div class="vtf-side-section">
+        <div class="vtf-side-heading">Categories</div>
+        <div class="vtf-chip-grid">
+          <button type="button" class="vtf-chip js-filter-cat" data-value="all">All</button>
+          {{#each defaultCategoryButtons}}
+            <button type="button" class="vtf-chip js-filter-cat" data-value="{{key}}">{{label}}</button>
+          {{/each}}
+        </div>
+        <div class="vtf-custom-cats">
+          {{#each customCategoriesList}}
+            <div class="vtf-custom-row">
+              <button type="button" class="vtf-chip vtf-chip-grow js-filter-cat" data-value="{{filterValue}}">{{name}}</button>
+              <button type="button" class="vtf-icon-btn js-remove-cat" data-id="{{_id}}" aria-label="Remove category">×</button>
+            </div>
+          {{/each}}
+        </div>
+        <form class="vtf-inline-add js-add-category">
+          <input class="vtf-input vtf-input-sm" type="text" name="name" placeholder="New custom category" maxlength="48">
+          <button type="submit" class="vtf-btn vtf-btn-secondary vtf-btn-sm">Add</button>
+        </form>
+      </div>
+      <div class="vtf-side-footer">
+        <button type="button" class="vtf-btn vtf-btn-ghost vtf-btn-block js-theme">{{themeLabel}}</button>
+        <button type="button" class="vtf-btn vtf-btn-ghost vtf-btn-block js-logout">Sign out</button>
+      </div>
+    </aside>
+    <div class="vtf-backdrop {{navOpenClass}} js-close-nav"></div>
+    <main class="vtf-main">
+      <header class="vtf-topbar">
+        <button type="button" class="vtf-icon-btn vtf-menu-btn js-open-nav" aria-label="Open navigation">☰</button>
+        <div class="vtf-topbar-title">
+          <h1>V Task Force</h1>
+          <p class="vtf-muted">Secure workspace · {{userEmail}}</p>
+        </div>
+        <button type="button" class="vtf-btn vtf-btn-primary vtf-btn-sm js-open-create">New task</button>
+      </header>
+      {{#unless dataReady}}
+        <div class="vtf-panel vtf-panel-loading">
+          <div class="vtf-spinner"></div>
+        </div>
+      {{else}}
+        <section class="vtf-dash" id="vtf-dash">
+          <div class="vtf-cards">
+            <div class="vtf-card">
+              <div class="vtf-card-label">Total</div>
+              <div class="vtf-card-value">{{stats.total}}</div>
+            </div>
+            <div class="vtf-card">
+              <div class="vtf-card-label">Pending</div>
+              <div class="vtf-card-value">{{stats.pending}}</div>
+            </div>
+            <div class="vtf-card">
+              <div class="vtf-card-label">Completed</div>
+              <div class="vtf-card-value">{{stats.completed}}</div>
+            </div>
+            <div class="vtf-card vtf-card-warn">
+              <div class="vtf-card-label">Overdue</div>
+              <div class="vtf-card-value">{{stats.overdue}}</div>
+            </div>
+          </div>
+          <div class="vtf-progress">
+            <div class="vtf-progress-head">
+              <span>Completion progress</span>
+              <span class="vtf-progress-val">{{stats.pct}}%</span>
+            </div>
+            <div class="vtf-progress-track">
+              <div class="vtf-progress-bar" style="width: {{stats.pct}}%"></div>
+            </div>
+          </div>
+        </section>
+        <section class="vtf-board" id="vtf-board">
+          <div class="vtf-toolbar">
+            <input class="vtf-input vtf-input-search" type="search" placeholder="Search tasks" aria-label="Search tasks">
+            <select class="vtf-select js-filter-completion">
+              <option value="all">All statuses</option>
+              <option value="pending">Pending</option>
+              <option value="completed">Completed</option>
+            </select>
+            <select class="vtf-select js-filter-priority">
+              <option value="all">All priorities</option>
+              <option value="low">Low</option>
+              <option value="medium">Medium</option>
+              <option value="high">High</option>
+              <option value="urgent">Urgent</option>
+            </select>
+            <button type="button" class="vtf-btn vtf-btn-ghost js-clear-filters">Reset filters</button>
+          </div>
+          {{#if filteredEmpty}}
+            <div class="vtf-empty">
+              <div class="vtf-empty-title">No tasks match</div>
+              <p class="vtf-muted">Adjust filters or create a new task to get started.</p>
+              <button type="button" class="vtf-btn vtf-btn-primary js-open-create">Create task</button>
+            </div>
+          {{else}}
+            <ul id="vtf-sort-list" class="vtf-task-list {{sortableClass}}">
+              {{#each filteredTasks}}
+                <li class="vtf-task-row" data-task-id="{{_id}}">
+                  <button type="button" class="vtf-drag task-drag" aria-label="Reorder">⋮⋮</button>
+                  <button type="button" class="vtf-check js-toggle {{#if completed}}is-done{{/if}}" data-id="{{_id}}" aria-label="Toggle complete"></button>
+                  <div class="vtf-task-body">
+                    <div class="vtf-task-title">{{title}}</div>
+                    {{#if notes}}
+                      <div class="vtf-task-notes">{{notes}}</div>
+                    {{/if}}
+                    <div class="vtf-task-meta">
+                      <span class="vtf-badge vtf-badge-cat">{{categoryLabel}}</span>
+                      <span class="vtf-badge vtf-badge-{{priority}}">{{priorityLabel}}</span>
+                      {{#if dueLabel}}
+                        <span class="vtf-due {{dueClass}}">{{dueLabel}}</span>
+                      {{/if}}
+                    </div>
+                  </div>
+                  <div class="vtf-task-actions">
+                    <button type="button" class="vtf-icon-btn js-edit" data-id="{{_id}}">✎</button>
+                    <button type="button" class="vtf-icon-btn js-delete" data-id="{{_id}}">🗑</button>
+                  </div>
+                </li>
+              {{/each}}
+            </ul>
+          {{/if}}
+        </section>
+      {{/unless}}
+    </main>
+    {{#if editorOpen}}
+      <div class="vtf-modal-root">
+        <div class="vtf-modal-backdrop js-close-editor" aria-hidden="true"></div>
+        <div class="vtf-modal" role="dialog" aria-modal="true">
+          <div class="vtf-modal-head">
+            <h2>{{editorTitle}}</h2>
+            <button type="button" class="vtf-icon-btn js-close-editor-btn">×</button>
+          </div>
+          <form class="vtf-form js-task-form">
+            <label class="vtf-field">
+              <span>Title</span>
+              <input class="vtf-input" type="text" name="title" required maxlength="120">
+            </label>
+            <label class="vtf-field">
+              <span>Notes</span>
+              <textarea class="vtf-input vtf-textarea" name="notes" rows="3" maxlength="2000"></textarea>
+            </label>
+            <div class="vtf-field-grid">
+              <label class="vtf-field">
+                <span>Category</span>
+                <select class="vtf-select" name="category">
+                  {{#each categoryOptions}}
+                    <option value="{{value}}">{{label}}</option>
+                  {{/each}}
+                </select>
+              </label>
+              <label class="vtf-field">
+                <span>Priority</span>
+                <select class="vtf-select" name="priority">
+                  {{#each priorityOptions}}
+                    <option value="{{value}}">{{label}}</option>
+                  {{/each}}
+                </select>
+              </label>
+              <label class="vtf-field">
+                <span>Due date</span>
+                <input class="vtf-input" type="date" name="due">
+              </label>
+            </div>
+            <div class="vtf-modal-actions">
+              <button type="button" class="vtf-btn vtf-btn-ghost js-close-editor-btn">Cancel</button>
+              <button type="submit" class="vtf-btn vtf-btn-primary">Save</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    {{/if}}
+  </div>
+</template>

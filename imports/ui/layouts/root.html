@@ -1,0 +1,43 @@
+<head>
+  <meta charset="utf-8">
+  <title>V Task Force</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0f172a">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&amp;display=swap" rel="stylesheet">
+</head>
+
+<body>
+  {{> rootLayout}}
+</body>
+
+<template name="rootLayout">
+  <div class="vtf-root">
+    {{> toastStack}}
+    {{> confirmGate}}
+    {{> Template.dynamic template=page}}
+  </div>
+</template>
+
+<template name="toastStack">
+  <div class="vtf-toasts" aria-live="polite">
+    {{#each toastItems}}
+      <div class="vtf-toast vtf-toast-{{type}}">{{message}}</div>
+    {{/each}}
+  </div>
+</template>
+
+<template name="confirmGate">
+  {{#if confirmOpen}}
+    <div class="vtf-confirm-backdrop">
+      <div class="vtf-confirm-card">
+        <p class="vtf-confirm-text">{{confirmMessage}}</p>
+        <div class="vtf-confirm-actions">
+          <button type="button" class="vtf-btn vtf-btn-ghost js-confirm-no">Cancel</button>
+          <button type="button" class="vtf-btn vtf-btn-danger js-confirm-yes">Delete</button>
+        </div>
+      </div>
+    </div>
+  {{/if}}
+</template>

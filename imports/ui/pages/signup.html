@@ -1,0 +1,29 @@
+<template name="signupPage">
+  <div class="vtf-guest">
+    <div class="vtf-auth-card">
+      <div class="vtf-brand-block">
+        <div class="vtf-logo-mark">V</div>
+        <div>
+          <h1 class="vtf-brand-title">Create account</h1>
+          <p class="vtf-muted">Join V Task Force in seconds</p>
+        </div>
+      </div>
+      <form class="vtf-form js-signup-form">
+        <label class="vtf-field">
+          <span>Full name</span>
+          <input class="vtf-input" type="text" name="name" autocomplete="name" required>
+        </label>
+        <label class="vtf-field">
+          <span>Email</span>
+          <input class="vtf-input" type="email" name="email" autocomplete="username" required>
+        </label>
+        <label class="vtf-field">
+          <span>Password</span>
+          <input class="vtf-input" type="password" name="password" autocomplete="new-password" minlength="8" required>
+        </label>
+        <button type="submit" class="vtf-btn vtf-btn-primary vtf-btn-block">Sign up</button>
+      </form>
+      <p class="vtf-muted vtf-auth-switch">Already have access? <a href="/login" class="vtf-link">Sign in</a></p>
+    </div>
+  </div>
+</template>
